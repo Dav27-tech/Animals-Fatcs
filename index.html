@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Animal Facts</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="container">
+      <header>
+        <h1 id="title">🐾 Animal Facts</h1>
+        <p class="subtitle">Découvre des faits aléatoires sur les animaux</p>
+      </header>
+
+      <div class="selection">
+        <button class="type-btn active" data-type="cat">🐱 Chat</button>
+        <button class="type-btn" data-type="dog">🐶 Chien</button>
+      </div>
+
+      <section class="fact-box" id="fact">Clique pour générer un fait</section>
+
+      <button id="getFactBtn" class="primary-btn">Générer un fait</button>
+
+      <div class="status">
+        <div class="loader" id="loader"></div>
+        <p class="error" id="error"></p>
+      </div>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
