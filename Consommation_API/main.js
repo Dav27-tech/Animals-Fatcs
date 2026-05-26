@@ -3,7 +3,7 @@
 // ==========================
 const API = {
   cat: "https://catfact.ninja/fact",
-  dog: "https://dogapi.dog/api/v2/facts",
+  dog: "https://cdn.jsdelivr.net/gh/DucNgn/Dog-facts-API-DEPRECATED-@master/data.json",
 };
 
 // ==========================
@@ -16,6 +16,7 @@ const btn = document.getElementById("getFactBtn");
 const typeButtons = document.querySelectorAll(".type-btn");
 
 let currentType = "cat";
+let dogFacts = [];
 
 // ==========================
 // 3. FUNCTIONS
@@ -41,19 +42,30 @@ function displayError(message) {
 
 // API
 async function fetchFact(type) {
-  const url = API[type];
-
   try {
-    const response = await fetch(url);
+    if (type === "dog") {
+      if (dogFacts.length === 0) {
+        const response = await fetch(API.dog);
+
+        if (!response.ok) {
+          throw new Error("Erreur serveur");
+        }
+
+        dogFacts = await response.json();
+      }
+
+      const randomIndex = Math.floor(Math.random() * dogFacts.length);
+      return dogFacts[randomIndex].fact;
+    }
+
+    const response = await fetch(API.cat);
 
     if (!response.ok) {
       throw new Error("Erreur serveur");
     }
 
     const data = await response.json();
-
-    // Normalisation des réponses
-    return type === "dog" ? data.data[0].attributes.body : data.fact;
+    return data.fact;
   } catch (error) {
     throw new Error("Impossible de récupérer un fait.");
   }
