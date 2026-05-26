@@ -38,7 +38,10 @@ function deviner() {
       });
     } else {
       if (i < 7) {
-        if (nombre < random_number) {
+        if (nombre < 0 || nombre > 100) {
+          alert("Le nombre doit etre entre 0 ~ 100");
+          number.value = "";
+        } else if (nombre < random_number) {
           alert("Tentez un nombre superieur");
           number.value = "";
         } else if (nombre > random_number) {
